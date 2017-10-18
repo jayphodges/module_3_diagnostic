@@ -4,7 +4,7 @@ class Station
               :address,
               :fuel_types,
               :distance,
-              :access_time
+              :access_times
 
   def initialize(response = {})
     @response = response
@@ -19,7 +19,7 @@ class Station
   private
 
     def complete_address(response)
-      "#{response[:stree_address]}, #{response[:city]}, #{response[:state]} #{response[:zip]}"
+      "#{response[:street_address]}, #{response[:city]}, #{response[:state]} #{response[:zip]}"
     end
 
     def distance_calc

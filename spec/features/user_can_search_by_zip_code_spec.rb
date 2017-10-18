@@ -15,7 +15,17 @@ feature "as a user" do
   # Then I should see a list of the 10 closest stations within 6 miles sorted by distance
   expect(page).to have_content(10)
   # And the stations should be limited to Electric and Propane
-  expect(page).not_to have_content("Gasoline")
+  expect(page).not_to have_content("BD")
+  expect(page).not_to have_content("E85")
+  expect(page).not_to have_content("HY")
+  expect(page).not_to have_content("LNG")
   # And for each of the stations I should see Name, Address, Fuel Types, Distance, and Access Times
+  within(first(".station")) do
+    expect(page).to have_css(".name")
+    expect(page).to have_css(".address")
+    expect(page).to have_css(".fuel_types")
+    expect(page).to have_css(".distance")
+    expect(page).to have_css(".access_times")
+    end
   end
 end
