@@ -2,13 +2,19 @@ class SearchController < ApplicationController
   def index
     location = params[:q]
     @conn = Faraday.new(url: "https://developer.nrel.gov/api/alt-fuel-stations/v1/") do |faraday|
-      faraday.headers["api_key"] = ENV["ALT_FUEL_API"]
       faraday.adapter Faraday.default_adapter
     end
     binding.pry
-    reply = @conn.get("/api/alt-fuel-stations/v1/nearest.json?location=#{location}")
+    reply = @conn.get("nearest.json?location=#{location}#{api_key}")
 
+    @stations = JSON.parse(reply.body, symbolize_names: true)
+    @stat = JSON.parse(reply.body, symbolize_names: true)[:fuel_stations]
   end
 
-# https://swrdfSr1SFSvXrlO3O0RpaHBE17pZBpX4HFtDQCK@api.data.gov/nrel/alt-fuel-stations/v1/nearest.json?location=80203
+  private
+
+    def api_key
+      "&api_key=#{ENV["ALT_FUEL_API"]}"
+    end
+
 end
