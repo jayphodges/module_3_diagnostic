@@ -1,0 +1,10 @@
+<%= @stations.count %> total
+<% @stations.each do |station| %>
+<ul class="station">
+  <li class="name"><%= station.name %></li>
+  <li class="address"><%= station.address %></li>
+  <!-- <li class="fuel_types"><%= station. %></li> -->
+  <li class="distance"><%= station.distance %></li>
+  <li class="access"><%= station.access %></li>
+</ul>
+<% end %>
